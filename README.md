@@ -1,3 +1,5 @@
-This is a repository of pratical perl scripts used by VLSI/EDA Engineers <br>
+**** All program is dedicated to the public domain under the CC0 license **** <br>
 
-All program is dedicated to the public domain under the CC0 license.
+This is a repository of pratical perl scripts used by VLSI/EDA Engineers <br>
+contact us at cloudeda.2023@gmail.com for custom scripts <br>
+

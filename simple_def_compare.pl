@@ -1,5 +1,5 @@
 # This program is dedicated to the public domain under the CC0 license.
-# Created by Cloud EDA 2023
+# Cloud EDA 2023
 
 use strict ;
 use warnings;
@@ -13,7 +13,7 @@ my $args = "@ARGV";
 my $error= 0;
 if ( $args =~ /-error_only/  ) { $error=1; }
 
-# variable to know the state of parsing
+# variables
 my $parse = 0;
 my @_data;
 my $_tmp;
@@ -51,14 +51,19 @@ while(<FH1>) {
     if ( ! defined($save_data{$_data[1]}) ) {
       # REF file has instance which is not present in GOLDEN , 
       # because current instance is not in the keys list of %save_data
+      # Scenario#2
       print "ERROR: $_data[1] is present in $REFERENCE_DEF but not in $GOLDEN_DEF \n";
     } else {
       # current instance is present in the keys list of %save_data
       # now compare if the values are the same , i.e did the location or orientation change ?
       if ( $save_data{$_data[1]} ne $_tmp ) {
+	# Scenario#4
         print "ERROR : $_data[1] location or orientation is different between $REFERENCE_DEF($_tmp) and $GOLDEN_DEF(".$save_data{$_data[1]}.")\n";
       } else {
-        if ( $error == 0 ) { print "INFO : no change in $_data[1] location or orientation \n"; }
+        if ( $error == 0 ) { 
+		# scenario #3
+		print "INFO : no change in $_data[1] location or orientation \n"; 
+	}
       }
 
       # unload current instance from memory 
@@ -73,6 +78,7 @@ close FH1;
 # are there any instances in GOLDEN which are not present in REF ?
 # any key which is not deleted in REF file parising loop is the answer 
 foreach my $_inst ( keys %save_data ) {
+  # scenario#1
   print "ERROR : $_inst present in $GOLDEN_DEF but not in $REFERENCE_DEF \n";
 }
 

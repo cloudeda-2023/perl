@@ -1,5 +1,5 @@
 ##########################################################################################################################
-## Description : Update $str to match your design inputs and the script split will top level eco file to per tile eco
+## Description : Update $str to match your design inputs and the script will split top level eco file to per tile eco
 ## Usage : perl eco_split.pl eda_tool.eco 
 ## This program is dedicated to the public domain under the CC0 license.
 ##                                            Cloud EDA 2023

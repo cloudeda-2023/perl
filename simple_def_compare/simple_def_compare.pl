@@ -1,5 +1,9 @@
-# This program is dedicated to the public domain under the CC0 license.
-# Cloud EDA 2023
+##########################################################################################################################
+## Description : this is generic script to report instance changes between two DEF files
+## Usage : perl simple_def_compare.pl input_def1.def input_def2.def [-error_only] 
+## This program is dedicated to the public domain under the CC0 license.
+##                                            Cloud EDA 2023
+##########################################################################################################################
 
 use strict ;
 use warnings;

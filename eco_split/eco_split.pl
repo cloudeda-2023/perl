@@ -14,31 +14,28 @@ my $cnt=0;
 foreach my $entry (split("\n",$str)) {
 	@sp = split('\s+',$entry);
 	$lookup{$sp[0]} = $sp[1];
-  $fh_lookup{$sp[0]} = "FH$cnt";$cnt++:
-  open("FH$cnt","<$sp[1].eco")||die("cannot open file $sp[1].eco\n");
+  	$fh_lookup{$sp[0]} = "FH$cnt";
+ 	open("FH$cnt","<$sp[1].eco")||die("cannot open file $sp[1].eco\n");
+  	$cnt++;
 }
 
 
 my $save_str = "";
 open(my TOP,">./TOP.eco");
 
-
 open(FH1,"<$ARGV[0]");
 while(<FH1>) {
 	if (/^\s*current_instance\s*$/) {
 		# check and split
-		if ($save_str =~ /core\/u_top_sse710_r0_aontop\/u_pd_systop\/u_pd_clustop\/u_cpu_gic_socket\/cortexa53_inst_u_cortex_a53/) {
-			print ARM $save_str;
-			print ARM ;
-		} elsif ($save_str =~/core\/i_rx/) {
-			print RX $save_str;
-			print RX ;
-		} elsif ($save_str =~/core\/i_tx/) {
-			print TX $save_str;
-			print TX;
-		} else {
-			print TOP $save_str;
-			print TOP;
+  		my $binned = 0;
+  		foreach my $inst ( keys %lookup ) {
+    			if ( $save_str =~ /$inst/ ) {
+       				print $fh_lookup{$inst} $save_str;
+	   			$binned = 1;
+			}
+		}
+		if ( $binned == 0 )  {
+  			print TOP $save_str;
 		}
 		$save_str = "";
 	} else {
@@ -49,7 +46,7 @@ while(<FH1>) {
 
 close FH1;
 close TOP;
-close ARM;
-close TX;
-close RX;
+foreach my $inst ( keys %lookup ) {
+	close $fh_lookup{$inst};
+}
 

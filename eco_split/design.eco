@@ -1,0 +1,12 @@
+current_instance
+current_instance ddr_inst/hier1
+size_cell my_cell BUFFD4
+current_instance
+currrent_instance ADC_0
+size_cell or_gate ORD4
+current_instance
+size_cell xor_gate XORD2
+current_instance
+current_instance DAC_0/dec
+size_cell test_cell ANDD2
+current_instance
